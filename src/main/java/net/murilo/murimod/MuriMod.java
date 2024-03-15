@@ -12,6 +12,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.murilo.murimod.block.ModBlocks;
+import net.murilo.murimod.item.ModCreativeModTabs;
 import net.murilo.murimod.item.ModItems;
 import org.slf4j.Logger;
 
@@ -24,7 +26,9 @@ public class MuriMod {
     public MuriMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModCreativeModTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlocks.register((modEventBus));
 
         modEventBus.addListener(this::commonSetup);
 
@@ -40,6 +44,7 @@ public class MuriMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.SAPPHIRE);
+            event.accept(ModItems.SCARF);
         }
     }
 
